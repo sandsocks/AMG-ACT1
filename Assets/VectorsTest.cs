@@ -7,9 +7,8 @@ public class VectorsTest : MonoBehaviour
 {
     public GameObject Player, Target, Test; 
     public Vector2 direction, normalized, pointInBetween;
-    [SerializeField] 
     public float distance;
-    private float PlayerX, PlayerY, TargetX, TargetY, TestX, TestY;
+    private float PlayerX, PlayerY, TargetX, TargetY;
     
     void Update()
     {
@@ -19,8 +18,6 @@ public class VectorsTest : MonoBehaviour
         PlayerY = Player.transform.position.y;
         TargetX = Target.transform.position.x;
         TargetY = Target.transform.position.y;
-        TestX = Test.transform.position.x;
-        TestY = Test.transform.position.y;
 
         distance = Mathf.Sqrt((direction.x * direction.x) + (direction.y * direction.y));
         normalized = direction / distance;

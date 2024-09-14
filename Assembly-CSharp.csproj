@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\VectorsTest.cs" />
+    <Compile Include="Assets\NuhUh.cs" />
     <Compile Include="Assets\testScript.cs" />
   </ItemGroup>
   <ItemGroup>
