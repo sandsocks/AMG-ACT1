@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,42 +7,40 @@ public class NuhUh : MonoBehaviour
 {
     public GameObject player;
     public GameObject target;
+    public GameObject test;
 
     public Vector2 direction, normalized;
 
-    public float distance;
+    public float distance, PlayerTestDistance, TargetTestDistance, D;
 
-    public bool isInBetween;
     void Update()
     {
         Vector2 playerPosition = player.transform.position;
         Vector2 targetPosition = target.transform.position;
-
-        Vector2 pointToCheck = transform.position;
-
-        isInBetween =  IsPointInBetween(playerPosition,targetPosition, pointToCheck);
+        Vector2 testPosition = test.transform.position;
 
         direction = target.transform.position - player.transform.position;
-        distance = Mathf.Sqrt((direction.x * direction.x) + (direction.y * direction.y));
+        distance = Mathf.Sqrt((playerPosition.x * targetPosition.x) + (playerPosition.y * targetPosition.y));
         normalized = direction / distance;
-    }
 
-    bool IsPointInBetween(Vector2 Player, Vector2 Target, Vector2 Test)
-    {
-        Vector2 PlayerTarget = Target - Player;
-        Vector2 PlayerTest = Test - Player;
-        Vector2 TargetTest = Test - Target;
-
-        float distSqr = TargetTest.sqrMagnitude;
-        float D = Vector2.Dot(PlayerTarget, TargetTest) / distSqr;
-
-        if (D < 0)
-        {
-            Debug.Log("The point is not in between.");
-            return false;
-        }
+        playerPosition = player.transform.position;
+        targetPosition = target.transform.position;
+        testPosition = test.transform.position;
         
-        Debug.Log("The point is in between.");
-        return true;
+        PlayerTestDistance = Mathf.Sqrt((playerPosition.x * testPosition.x) + (playerPosition.y * testPosition.y));
+        TargetTestDistance = Mathf.Sqrt((targetPosition.x * testPosition.x) + (targetPosition.y * testPosition.y));
+
+        D = PlayerTestDistance + TargetTestDistance;
+        
+        if (D == distance)
+        {
+            Debug.Log("Is in between");
+        }
+
+        if (D != distance)
+        {
+            Debug.Log("Is not in between");
+        }
     }
+
 }
